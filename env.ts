@@ -41,6 +41,8 @@ try {
     })
     process.exit(1)
   }
+
+  throw err
 }
 
 export const isProd = () => env.APP_STAGE === 'production'
