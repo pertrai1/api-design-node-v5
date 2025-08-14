@@ -6,13 +6,12 @@ import { z } from 'zod'
 
 const router = Router()
 
-router.post('/register', validateBody(insertUserSchema), register)
-
 const loginSchema = z.object({
   email: z.email('Invalid email format'),
   password: z.string().min(1, 'Password is required'),
 })
 
+router.post('/register', validateBody(insertUserSchema), register)
 router.post('/login', validateBody(loginSchema), login)
 
 export { router }
