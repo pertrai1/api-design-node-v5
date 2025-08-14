@@ -6,6 +6,7 @@ import cors from 'cors'
 import morgan from 'morgan'
 import helmet from 'helmet'
 import { isTest } from '../env.ts'
+import { APIError } from './middleware/errorHandler.ts'
 
 const server = express()
 server.use(helmet())
@@ -17,6 +18,10 @@ server.use(
     skip: () => isTest(),
   })
 )
+
+server.use((_, _, next) => {
+  next(new APIError(400, 'ValidationError', 'validation error'))
+})
 
 server.get('/health', (req, res) => {
   res.json({ message: 'hello' }).status(200)
