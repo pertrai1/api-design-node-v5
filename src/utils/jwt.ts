@@ -8,7 +8,7 @@ export interface JwtPayload {
   username: string
 }
 
-export const generateToken = (payload: JwtPayload) => {
+export const generateToken = (payload: JwtPayload): Promise<string> => {
   const secret = env.JWT_SECRET
   const secretKey = createSecretKey(secret, 'utf-8')
 
